@@ -2,28 +2,28 @@
     "name": "abs-opds",
     "version": "2.0.3",
     "description": "PoC for OPDS in ABS",
-    "license": "ISC",
+    "license": "AGPL-3.0-only",
     "author": "",
     "type": "module",
     "main": "dist/index.js",
     "scripts": {
         "build": "tsc && cp -r src/i18n/languages dist/i18n/languages",
         "start": "tsx src/index.ts",
-        "dev": "tsx --watch src/index.ts"
+        "dev": "tsx --watch src/index.ts",
+        "typecheck": "tsc --noEmit",
+        "test": "tsx --test test/*.test.ts",
+        "format": "prettier --write ."
     },
     "devDependencies": {
         "@types/express": "^5.0.6",
-        "@types/fuzzy-search": "^2.1.5",
         "@types/node": "^22.19.21",
         "prettier": "3.9.4",
-        "ts-node": "^10.9.2",
         "typescript": "^5.9.3"
     },
     "dependencies": {
         "axios": "^1.17.0",
         "dotenv": "^17.4.2",
         "express": "^5.2.1",
-        "fuzzy-search": "^3.2.1",
         "tsx": "^4.22.4",
         "xmlbuilder": "^15.1.1"
     }

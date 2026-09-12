@@ -34,17 +34,18 @@ Spin up the provided Docker Compose instance and add `http://<local-server-ip>:3
 
 The following environment variables can be set in a `.env` file or directly in your Docker Compose setup.
 
-| Variable        | Description                                                                                                                                                                                       | Default        | Required |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------- |
-| ABS_URL         | Your Audiobookshelf server URL, e.g. https://audiobooks.dev                                                                                                                                       |                | Yes      |
-| SHOW_AUDIOBOOKS | Show audiobooks in the OPDS feed. When disabled, top-level libraries/categories with no ebook items are hidden.                                                                                   | false          | No       |
-| SHOW_CHAR_CARDS | Show character cards (A, B, C, ...) before showing names of author, narrator, etc.                                                                                                                | false          | No       |
-| OPDS_CATEGORIES | Comma-separated categories to show in the listed order: `all`, `recent`, `authors`, `narrators`, `genres`, `series`. If unset, all categories are shown in the default order.                     | all categories | No       |
-| USE_PROXY       | Use a proxy to connect to ABS. If you use the docker network, set this to true to view covers in your reader. Creates potential security risks if someone can read the RAM of the software.       | false          | No       |
-| PORT            | The port the OPDS server will run on.                                                                                                                                                             | 3010           | No       |
-| OPDS_PAGE_SIZE  | Number of items on each page in the OPDS feed.                                                                                                                                                    | 20             | No       |
-| OPDS_USERS      | Comma-separated list of users in the format `username:ABS_API_TOKEN:password`. This does NOT need to be your ABS username and password, but values you can freely set to log in with your reader. |                | No       |
-| CACHE_EXPIRATION  | Amount of time to cache requests, in seconds                                                                                                                                                   | 3600             | No       |
+| Variable         | Description                                                                                                                                                                                       | Default        | Required |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------- |
+| ABS_URL          | Your Audiobookshelf server URL, e.g. https://audiobooks.dev                                                                                                                                       |                | Yes      |
+| SHOW_AUDIOBOOKS  | Show audiobooks in the OPDS feed. When disabled, top-level libraries/categories with no ebook items are hidden.                                                                                   | false          | No       |
+| SHOW_CHAR_CARDS  | Show character cards (A, B, C, ...) before showing names of author, narrator, etc.                                                                                                                | false          | No       |
+| OPDS_CATEGORIES  | Comma-separated categories to show in the listed order: `all`, `recent`, `authors`, `narrators`, `genres`, `series`. If unset, all categories are shown in the default order.                     | all categories | No       |
+| USE_PROXY        | Use a proxy to connect to ABS. If you use the docker network, set this to true to view covers in your reader. Creates potential security risks if someone can read the RAM of the software.       | false          | No       |
+| PORT             | The port the OPDS server will run on.                                                                                                                                                             | 3010           | No       |
+| OPDS_PAGE_SIZE   | Number of items on each page in the OPDS feed.                                                                                                                                                    | 20             | No       |
+| OPDS_USERS       | Comma-separated list of users in the format `username:ABS_API_TOKEN:password`. This does NOT need to be your ABS username and password, but values you can freely set to log in with your reader. |                | No       |
+| CACHE_EXPIRATION | Amount of time to cache requests, in seconds                                                                                                                                                      | 3600           | No       |
+
 ## Attribution
 
 Thanks to [Martin Joneš](https://github.com/jondycz) for helping with some features and adding this to TrueNas.
@@ -64,3 +65,16 @@ I plan to add these once the refactoring is finished. This can take months or ye
 ## Docker Compose
 
 See `docker-compose.yml` for an example setup.
+
+## Development
+
+```bash
+pnpm install
+pnpm dev        # run from source with watch mode
+pnpm typecheck  # tsc --noEmit
+pnpm test       # node:test suite (no extra dependencies)
+pnpm format     # prettier
+```
+
+`pnpm build` compiles to `dist/`; the Docker image builds in a separate stage and
+ships only the runtime dependencies.
